@@ -62,7 +62,7 @@ sap.ui.controller("frequentpatterngenerator.MainView", {
 			}));
 			for (var j = 0; j < getInputValColumn; j++) {
 				oRow.addCell(new sap.m.Input({
-					width: "25%",
+					width: "35px",
 					valueStateText: "Enter the value as 0 or 1",
 					liveChange: function(oEvent) {
 						var liveValue = oEvent.getSource().getValue();
