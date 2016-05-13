@@ -1,5 +1,4 @@
 ##Design
------------
 __Team Lead: Anthony Arun__
 * Bhavneet
 * Kannan
@@ -14,7 +13,6 @@ __Team Lead: Anthony Arun__
 * Pooja
 
 ##Development
---------------
 __Team Lead: Akshay__
 * Anjali
 * Archana
@@ -29,7 +27,6 @@ __Team Lead: Akshay__
 * Priya
 
 ##Testing
-------------
 __Team Lead: Jyothi__
 * Pema
 * Rohit
