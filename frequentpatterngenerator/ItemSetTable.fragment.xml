@@ -1,0 +1,17 @@
+
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Dialog id="idItemSetDialog" title="Item Set Table"
+		contentHeight="80%" contentWidth="80%" 
+		horizontalScrolling="false" verticalScrolling="false">
+		<content>
+			<Table id="oTable">
+		   
+		    </Table>
+		</content>
+		<buttons>
+			<Button text="Ok" press="onPressDialogOk" />
+			<Button text="Cancel" press="onPressDialogCancel" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

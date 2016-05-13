@@ -1,0 +1,37 @@
+.mainViewGridContainer
+{
+	width: 100% !important;
+    height: 100% !important;
+}
+
+.mainViewGridContainer .sapUiRespGridSpanL6, 
+.mainViewGridContainer .sapUiRespGridSpanM6, 
+.mainViewGridContainer .sapUiRespGridSpanS6,
+.mainViewGridContainer .sapUiRespGridSpanXL6
+{
+	position: absolute !important;
+    margin: 0 auto !important;
+    left: 0 !important;
+    right: 0 !important;
+}
+
+.iconTabFilterHeading
+{
+	text-align: center !important;
+    width: 100% !important;
+    font-size: 1.1rem !important;
+	text-decoration: underline !important;
+    margin-bottom: 10px !important;
+}
+
+.PageHeading
+{
+	font-size: 1.3rem !important;
+}
+
+.resultItemsLabel
+{
+	font-size: 17px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #111;
+}

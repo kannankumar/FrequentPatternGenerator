@@ -1,0 +1,89 @@
+<mvc:View controllerName="frequentpatterngenerator.MainView" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	xmlns:layout="sap.ui.layout" xmlns:simpleForm="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page>
+				<customHeader>
+					<Bar>
+						<contentLeft>
+						</contentLeft>
+						<contentMiddle>
+							<Label class="PageHeading" text="Frequent Pattern Generator" />
+						</contentMiddle>
+						<contentRight>
+						</contentRight>
+					</Bar>
+				</customHeader>	
+				<content>
+					<l:Grid class="mainViewGridContainer" defaultSpan="L6 M6 S6" width="auto">
+						<l:content>
+							<Panel id="idFormPanel" width="auto" class="sapUiResponsiveMargin sapUiNoContentPadding sapHcPeNoBorder">
+								<headerToolbar>
+									<Toolbar>
+										<Title text="Item Set Data" level="H1"/>
+									</Toolbar>
+								</headerToolbar>
+								<content>
+									<simpleForm:SimpleForm id="idFormProgramInfo" editable="true" class="editableForm" maxContainerCols="2" layout="ResponsiveGridLayout"
+										labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="1">
+										<simpleForm:content>
+											<core:Title id="idDetails" text="Enter Details" level="H3"/>
+											<Label text="Number Of Items"/>
+											<Select id="idItems">
+												<core:Item key="1" text="1" tooltip="1"/>
+												<core:Item key="2" text="2" tooltip="1"/>
+												<core:Item key="3" text="3" tooltip="1"/>
+												<core:Item key="4" text="4" tooltip="1"/>
+												<core:Item key="5" text="5" tooltip="1"/>
+												<core:Item key="6" text="6" tooltip="1"/>
+												<core:Item key="7" text="7" tooltip="1"/>
+												<core:Item key="8" text="8" tooltip="1"/>
+												<core:Item key="9" text="9" tooltip="1"/>
+												<core:Item key="10" text="10" tooltip="1"/>
+											</Select>
+											<Label text="Number Of Transactions"/>
+											<Select id="idTransactions">
+												<core:Item key="1" text="1" tooltip="1"/>
+												<core:Item key="2" text="2" tooltip="1"/>
+												<core:Item key="3" text="3" tooltip="1"/>
+												<core:Item key="4" text="4" tooltip="1"/>
+												<core:Item key="5" text="5" tooltip="1"/>
+												<core:Item key="6" text="6" tooltip="1"/>
+												<core:Item key="7" text="7" tooltip="1"/>
+												<core:Item key="8" text="8" tooltip="1"/>
+												<core:Item key="9" text="9" tooltip="1"/>
+												<core:Item key="10" text="10" tooltip="1"/>
+											</Select>
+											<Button type="Emphasized" text="Generate" press="handleGeneratePress"/>
+											<Label text="Minsup"/>
+											<Select id="idMinsup">
+												<core:Item key="1" text="1" tooltip="1"/>
+												<core:Item key="2" text="2" tooltip="1"/>
+												<core:Item key="3" text="3" tooltip="1"/>
+												<core:Item key="4" text="4" tooltip="1"/>
+												<core:Item key="5" text="5" tooltip="1"/>
+												<core:Item key="6" text="6" tooltip="1"/>
+												<core:Item key="7" text="7" tooltip="1"/>
+												<core:Item key="8" text="8" tooltip="1"/>
+												<core:Item key="9" text="9" tooltip="1"/>
+												<core:Item key="10" text="10" tooltip="1"/>
+											</Select>
+											<Label text="Choose Apriori/Brute force"/>
+											<Select id="idAlgorithm">
+												<core:Item key="APRIORI" text="Apriori"/>
+												<core:Item key="BRUTE" text="Brute Force"/>
+											</Select>
+											<Button type="Emphasized" text="Submit" press="handleGenerateSubmit"></Button>
+										</simpleForm:content>
+									</simpleForm:SimpleForm>
+								</content>
+							</Panel>
+							<l:VerticalLayout id="idVerticalLayoutFileUploadLegalDocuments" width="100%"></l:VerticalLayout>
+						</l:content>
+					</l:Grid>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

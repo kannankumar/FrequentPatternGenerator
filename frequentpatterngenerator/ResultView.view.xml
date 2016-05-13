@@ -1,0 +1,21 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="frequentpatterngenerator.ResultView" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page>
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Button icon="sap-icon://nav-back" press="handleBackBtnClick"></Button>
+				</contentLeft>
+				<contentMiddle>
+					<Label id="resultViewPageHeading" class="PageHeading" text="Result" />
+				</contentMiddle>
+				<contentRight>
+				</contentRight>
+			</Bar>
+		</customHeader>	
+		<content>
+			<IconTabBar id="idIconTabBarFiori2" stretchContentHeight="true" upperCase="true" expandable="false" class="sapUiResponsiveContentPadding">
+			</IconTabBar>
+		</content>
+	</Page>
+</core:View>
