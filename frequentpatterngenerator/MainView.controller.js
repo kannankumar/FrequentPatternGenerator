@@ -122,7 +122,18 @@ sap.ui.controller("frequentpatterngenerator.MainView", {
 			text: i
 		}));
 	},
-	
+	onPressDialogAutoGenerate: function(oEvent){
+		var table = sap.ui.getCore().byId("oTable");
+		var rowCount = table.getItems().length;
+		var cellCount = table.getItems()[0].getCells().length;
+
+		for (var j = 0; j < rowCount; j++) {
+			for (var i = 1; i < cellCount; i++) {
+				var randomVal = Math.random()<0.5 ? 0 : 1;
+				table.getItems()[j].getCells()[i].setValue(randomVal);				
+			}
+		}
+	},
 	onPressDialogOk: function(oEvent) {
 		var table = sap.ui.getCore().byId("oTable");
 		var rowCount = table.getItems().length;
