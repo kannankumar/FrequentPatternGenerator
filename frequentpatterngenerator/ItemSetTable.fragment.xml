@@ -10,6 +10,7 @@
 		    </Table>
 		</content>
 		<buttons>
+			<Button text="Auto Generate Values" press="onPressDialogAutoGenerate" />
 			<Button text="Ok" press="onPressDialogOk" />
 			<Button text="Cancel" press="onPressDialogCancel" />
 		</buttons>
