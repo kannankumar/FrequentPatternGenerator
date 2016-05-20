@@ -149,8 +149,8 @@ sap.ui.controller("frequentpatterngenerator.MainView", {
 	    	flag = 1;
 	    }
 	    if(flag){ 
-        	sap.m.MessageToast.show("Fill in the entries in input Table");
         	this.handleGeneratePress();
+        	sap.m.MessageToast.show("Fill in the entries in input Table");
         	return false;
         }
         else{
