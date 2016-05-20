@@ -6,7 +6,7 @@ frequentpatterngenerator.algorithms.bruteforce = {
 		ItemsetSupportData: {},
 		max: null,
 		bruteRes: {},
-
+        itm: null,
 		getItemSets : function(items) {
 
 			var possible_items = [ "A", "B", "C", "D", "E", "F",
@@ -32,8 +32,8 @@ frequentpatterngenerator.algorithms.bruteforce = {
 			 * To get the character array for which we need to find
 			 * combinations
 			 */
-			var itm = possible_items.slice(0, items[0].length);
-			this.aCombi = frequentpatterngenerator.algorithms.bruteforce.generateCombinations(itm);
+			this.itm = possible_items.slice(0, items[0].length);
+			this.aCombi = frequentpatterngenerator.algorithms.bruteforce.generateCombinations(this.itm);
 		},
 
 		generateCombinations : function(chars) {
@@ -71,6 +71,21 @@ frequentpatterngenerator.algorithms.bruteforce = {
 			});
 			var result = this.findItemsWithMinSup(MinsupValue)
 			return result;
+		},
+		
+		possibleItemSets: function(){
+			var that = this;
+			that.oPossibleItemSets = {};
+			for(s=0; s<=this.itm.length;s++){
+				var ar = [];
+				for (key in that.ItemsetSupportData) {
+					if (that.ItemsetSupportData[key] == s) {
+						ar.push(key);
+					}
+				}
+				that.oPossibleItemSets[s] = ar;
+			}
+			return that.oPossibleItemSets;
 		},
 
 		findItemsWithMinSup : function(minsup) {

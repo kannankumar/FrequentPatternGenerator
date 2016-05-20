@@ -7,7 +7,11 @@ frequentpatterngenerator.algorithms.apriori = {
     	  1:[]
       },
       oItemSets: {},
+	  oCandidates: {},
+	  aLogHistory:[],
+
       mCreateTransactionalDB: function(aInput, iMinSup){
+			this.aLogHistory.push("mCreateTransactionalDB");
               var aTemp, sCode;
               for(var i=0; i < aInput.length; i++){
                 aTemp = [];
@@ -26,26 +30,50 @@ frequentpatterngenerator.algorithms.apriori = {
               } 
             },
             
-            mAddToItemSet:function (sCode, iMinSup){
-                  if(!this.oItemSets[iMinSup]){
-                        this.oItemSets[iMinSup] = [];
+            mAddToItemSet:function (sCode, iSup){
+				this.aLogHistory.push("mAddToItemSet");
+                  if(!this.oItemSets[iSup]){
+                        this.oItemSets[iSup] = [];
                   }
-                  this.oItemSets[iMinSup].push(sCode);
+                  this.oItemSets[iSup].push(sCode);
             },
             
-            mGenerateCandidates: function (iPrevK){
+            mGenerateCandidates: function (iPrevK, iMinSup){
+				this.aLogHistory.push("mGenerateCandidates");
+				var sCandidate, bIsCandidateValid;
+				this.oCandidates[iPrevK] = this.oC;
               this.oC = {};
               for(var i=0; i < this.oResult[iPrevK].length - 1; i++){
-                for(var j = i+1; j <= this.oResult[iPrevK].length; j++){
-                  var sCandidate = jQuery.unique((this.oResult[iPrevK][i] + this.oResult[iPrevK][j]).split("")).sort().join("");
+                for(var j = i+1; j < this.oResult[iPrevK].length; j++){
+					if(this.oCandidates[iPrevK][this.oResult[iPrevK][i]] >= iMinSup && this.oCandidates[iPrevK][this.oResult[iPrevK][j]] >= iMinSup){
+                  sCandidate = jQuery.unique((this.oResult[iPrevK][i] + this.oResult[iPrevK][j]).split("")).sort().join("");
                   if(sCandidate.length === iPrevK + 1 && (!this.oC.hasOwnProperty(sCandidate))){
+					bIsCandidateValid = this.mPruneCandidate(sCandidate,iMinSup);
+					if(bIsCandidateValid){
                     this.oC[sCandidate] = 0;
+					}
                   }
                 }
               }
-            },
-
+              }
+              },
+			
+			mPruneCandidate: function(sCandidate, iMinSup){
+					this.aLogHistory.push("mPruneCandidate");
+					var sSubSet;
+					for(var i = 0; i < sCandidate.length; i++){
+						sSubSet = sCandidate.split("");
+						sSubSet.splice(i,1);
+						sSubSet = sSubSet.sort().join("");
+						if(this.oCandidates[sSubSet.length][sSubSet] < iMinSup){
+			            	return false;
+			            }
+					}
+					return true;
+				},
+				
             mGetCount: function(){
+				this.aLogHistory.push("mGetCount");
               var iSupport = 0;
               var aTDB = this.aTDB;
                   for(var j=0; j < aTDB.length; j++){
@@ -60,6 +88,7 @@ frequentpatterngenerator.algorithms.apriori = {
             },
 
             mCalculateSupportForCandidates:function (iPrevK, iMinSup){
+			this.aLogHistory.push("mCalculateSupportForCandidates");
               var aKeys = Object.keys(this.oC);
               if(!this.oResult[iPrevK + 1]){
                  this.oResult[iPrevK + 1] = [];
@@ -72,20 +101,48 @@ frequentpatterngenerator.algorithms.apriori = {
                  }
               }
             },
+	
+		mSortCandidatesBySupport: function(oCandidates){
+			var oMainObj = {};
+					var aKeys = Object.keys(oCandidates);
+					for(var i=0; i < aKeys.length; i++){
+					var aSubKeys = Object.keys(oCandidates[aKeys[i]]);
+					for(var j = 0; j< aSubKeys.length; j++){
+					if(!oMainObj.hasOwnProperty(oCandidates[aKeys[i]][aSubKeys[j]])){
+					oMainObj[oCandidates[aKeys[i]][aSubKeys[j]]] = [];
+					}
+					oMainObj[oCandidates[aKeys[i]][aSubKeys[j]]].push(aSubKeys[j]);
+					}
+					}
+					return oMainObj;
+		},
 
             getItemSets: function (aInput, iMinSup){
+            	var oController = this;
               this.oC= {};
               this.aTDB= [];
               this.oResult= {
               	  1:[]
                 };
               this.oItemSets = {};
+			  this.oCandidates = {};
+			  this.aLogHistory = [];
+			  
+			  this.aLogHistory.push("getItemSets");
+			  
               this.mCreateTransactionalDB(aInput, iMinSup);
               for(var k=1; this.oResult[k].length; k++){
-                this.mGenerateCandidates(k);
+                this.mGenerateCandidates(k, iMinSup);
                 this.mCalculateSupportForCandidates(k,iMinSup);
               }
-//              console.log(this.oItemSets);
-              return this.oItemSets;
+			  
+		var oCandidatesBySupport = oController.mSortCandidatesBySupport(this.oCandidates);
+			  var abc =  {		
+					"oCandidatesBySupport":oCandidatesBySupport,
+					  "oIntermediateCandidates":this.oCandidates,
+					  "oItemSets":this.oItemSets,
+					  "sMethodLog":this.aLogHistory
+				  };
+              return abc;
             }
 };

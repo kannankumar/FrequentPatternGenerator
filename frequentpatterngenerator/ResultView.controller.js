@@ -28,32 +28,37 @@ sap.ui.controller("frequentpatterngenerator.ResultView", {
 		var result = {};  
 		var MinsupValue = inputValues.minsup;
 		var SelectedAlgoValue = inputValues.algorithm;
-		
+		//possibleItemSets = frequentpatterngenerator.algorithms.bruteforce.possibleItemSets();
 		if (SelectedAlgoValue == "APRIORI") {
 			this.getView().byId("resultViewPageHeading").setText("Result (using Apriori Algorithm)");
-			result = frequentpatterngenerator.algorithms.apriori.getItemSets(inputValues.aMainArray, inputValues.minsup);
+			var aprioriResult = frequentpatterngenerator.algorithms.apriori.getItemSets(inputValues.aMainArray, inputValues.minsup);
+			result = aprioriResult.oItemSets;
+			possibleItemSets= aprioriResult.oCandidatesBySupport;
 			this.displayResultSet(MinsupValue, result);
 			this.displayInputBinaryMatrix();
+			this._displayFlowChart();
 		} else if (SelectedAlgoValue == "BRUTE") {
 			this.getView().byId("resultViewPageHeading").setText("Result (using Brute Force Algorithm)");
 			frequentpatterngenerator.algorithms.bruteforce.getItemSets(inputValues.aMainArray);
 			result = frequentpatterngenerator.algorithms.bruteforce.computeSupport(MinsupValue);
+			possibleItemSets = frequentpatterngenerator.algorithms.bruteforce.possibleItemSets();
 			this.displayResultSet(MinsupValue, result);
 			this.displayInputBinaryMatrix();
+			this._displayFlowChart();
 		}
 	},
 	
 	displayResultSet: function(MinsupValue, result) {
+		var oController = this;
 		var oIcontabbar = this.getView().byId("idIconTabBarFiori2");
 		var oItem;
 		var contentVBox;
 		var contentVBox_HBox;
-		var i=0;
 		
 		oIcontabbar.destroyContent();
 		oIcontabbar.destroyItems();
 		
-		for ( i = MinsupValue; i <= inputValues.transactions; i++) {
+		for (var i = MinsupValue; i <= inputValues.transactions; i++) {
 			if(result[i] != undefined)
 			{
 				oItem = new sap.m.IconTabFilter({
@@ -75,24 +80,55 @@ sap.ui.controller("frequentpatterngenerator.ResultView", {
 					});
 					contentVBox.addItem(contentVBox_HBox);
 				}
-				oIcontabbar.addItem(oItem);
 				
+				oIcontabbar.addItem(oItem);
 			}
 		}
+		oController._displayPossibleItemSets();
 	},
 	
+	_displayPossibleItemSets: function(){
+		var oIcontabbar = this.getView().byId("idIconTabBarFiori2");
+		oIcontabbar.setUpperCase(false);
+		var oItem = new sap.m.IconTabFilter({
+			showAll: true,
+			text: "Possible Items"
+//			count: 6,
+//			iconColor: "Positive",
+//			key: 6
+		});
+		var possibleItemsVBox = new sap.m.VBox();
+		var possibleItemsVBox_HBox;
+		possibleItemsVBox.addItem(new sap.m.Label({text: "All Possible Item Sets" }).addStyleClass("iconTabFilterHeading"));
+		for(var i=0; i<=inputValues.transactions;i++){
+			if(possibleItemSets[i] != undefined)
+			{ 
+				for(j=0;j<possibleItemSets[i].length;j++)
+				{
+					possibleItemsVBox_HBox = new sap.m.HBox({
+						items: [
+//						 
+						    new sap.m.Label({text : possibleItemSets[i][j]+":"}).addStyleClass("resultItemsLabel"),
+						    new sap.m.Label({text : i})
+						]
+					});
+					possibleItemsVBox.addItem(possibleItemsVBox_HBox);
+				}
+			}
+		}
+		oItem.addContent(possibleItemsVBox);
+		oIcontabbar.addItem(oItem);
+	},
 	displayInputBinaryMatrix: function(){
 		var oIcontabbar = this.getView().byId("idIconTabBarFiori2");
 		var i = oIcontabbar.getAggregation("items").length;
+		oIcontabbar.setUpperCase(false);
 		var oItem;
 		var contentVBox;
 		var contentVBox_HBox;
 			oItem = new sap.m.IconTabFilter({
 					showAll: true,
-					count: "Input Binary Matrix",
-					iconColor: "Positive",
-					key: i+1
-					
+					text: "Input Binary Matrix"
 				});
 				contentVBox = new sap.m.VBox();
 				oItem.addContent(contentVBox);
@@ -192,6 +228,24 @@ sap.ui.controller("frequentpatterngenerator.ResultView", {
 		return new sap.m.Column().setHeader(new sap.m.Text({
 			text: i
 		}));
+	},
+	_displayFlowChart:function(){
+		var oIcontabbar = this.getView().byId("idIconTabBarFiori2");
+		oIcontabbar.setUpperCase(false);
+		var oItem = new sap.m.IconTabFilter({
+			showAll: true,
+			text: "Flow Chart"
+
+		});
+		var flowChartVBox = new sap.m.VBox({
+			items:[
+			       new sap.m.Image({
+			    	   src: "./images/FlowChart.PNG"
+			       })
+			       ]
+		});
+		oItem.addContent(flowChartVBox);
+		oIcontabbar.addItem(oItem);
 	},
 	handleBackBtnClick: function() {
 		var oIcontabbar = this.getView().byId("idIconTabBarFiori2");
