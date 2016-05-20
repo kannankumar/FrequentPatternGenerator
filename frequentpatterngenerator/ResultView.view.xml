@@ -14,7 +14,7 @@
 			</Bar>
 		</customHeader>	
 		<content>
-			<IconTabBar id="idIconTabBarFiori2" stretchContentHeight="true" upperCase="true" expandable="false" class="sapUiResponsiveContentPadding">
+			<IconTabBar id="idIconTabBarFiori2" showSelection="true" applyContentPadding="true" stretchContentHeight="true" upperCase="true" expandable="false" class="">
 			</IconTabBar>
 		</content>
 	</Page>

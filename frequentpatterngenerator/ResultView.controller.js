@@ -108,8 +108,8 @@ sap.ui.controller("frequentpatterngenerator.ResultView", {
 					possibleItemsVBox_HBox = new sap.m.HBox({
 						items: [
 //						 
-						    new sap.m.Label({text : possibleItemSets[i][j]+":"}).addStyleClass("resultItemsLabel"),
-						    new sap.m.Label({text : i})
+						    new sap.m.Label({text : possibleItemSets[i][j]}).addStyleClass("resultItemsLabel"),
+						    new sap.m.Label({text : "  ("+i+")"})
 						]
 					});
 					possibleItemsVBox.addItem(possibleItemsVBox_HBox);

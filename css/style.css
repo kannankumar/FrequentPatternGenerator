@@ -18,10 +18,11 @@
 .iconTabFilterHeading
 {
 	text-align: center !important;
+    padding: 2rem;
     width: 100% !important;
     font-size: 1.1rem !important;
-	text-decoration: underline !important;
-    margin-bottom: 10px !important;
+	/*text-decoration: underline !important;*/
+    /*margin-bottom: 10px !important;*/
 }
 
 .PageHeading
@@ -33,5 +34,5 @@
 {
 	font-size: 17px;
     margin-bottom: 5px;
-    border-bottom: 1px solid #111;
+    /*border-bottom: 1px solid #111;*/
 }

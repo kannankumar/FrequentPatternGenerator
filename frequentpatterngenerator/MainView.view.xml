@@ -16,19 +16,19 @@
 					</Bar>
 				</customHeader>	
 				<content>
-					<l:Grid class="mainViewGridContainer" defaultSpan="L6 M6 S6" width="auto">
+					<l:Grid class="mainViewGridContainer" defaultSpan="L6 M12 S12" width="auto">
 						<l:content>
 							<Panel id="idFormPanel" width="auto" class="sapUiResponsiveMargin sapUiNoContentPadding sapHcPeNoBorder">
 								<headerToolbar>
 									<Toolbar>
-										<Title text="Item Set Data" level="H1"/>
+										<!-- <Title text="Item Set Data" level="H1"/> -->
 									</Toolbar>
 								</headerToolbar>
 								<content>
 									<simpleForm:SimpleForm id="idFormProgramInfo" editable="true" class="editableForm" maxContainerCols="2" layout="ResponsiveGridLayout"
 										labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="1">
 										<simpleForm:content>
-											<core:Title id="idDetails" text="Enter Details" level="H3"/>
+											<core:Title id="idDetails" text="Enter Item Set Details" level="H3"/>
 											<Label text="Number Of Items"/>
 											<Select id="idItems">
 												<core:Item key="1" text="1" tooltip="1"/>
@@ -55,7 +55,7 @@
 												<core:Item key="9" text="9" tooltip="1"/>
 												<core:Item key="10" text="10" tooltip="1"/>
 											</Select>
-											<Button type="Emphasized" text="Generate" press="handleGeneratePress"/>
+											<Button type="Emphasized" text="Show Input Matrix" press="handleGeneratePress"/>
 											<Label text="Minsup"/>
 											<Select id="idMinsup" items="{minsupKey>/minSupKeys}">
 												<core:Item key="{minsupKey>/key}" text="{minsupKey>text}" tooltip="{minsupKey>/text}"/>
@@ -66,7 +66,7 @@
 												<core:Item key="APRIORI" text="Apriori"/>
 												<core:Item key="BRUTE" text="Brute Force"/>
 											</Select>
-											<Button type="Emphasized" text="Submit" press="handleGenerateSubmit"></Button>
+											<Button type="Emphasized" text="Run Algorithm" press="handleGenerateSubmit"></Button>
 										</simpleForm:content>
 									</simpleForm:SimpleForm>
 								</content>
