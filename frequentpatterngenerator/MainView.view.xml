@@ -43,7 +43,7 @@
 												<core:Item key="10" text="10" tooltip="1"/>
 											</Select>
 											<Label text="Number Of Transactions"/>
-											<Select id="idTransactions">
+											<Select id="idTransactions" change="setMinsup">
 												<core:Item key="1" text="1" tooltip="1"/>
 												<core:Item key="2" text="2" tooltip="1"/>
 												<core:Item key="3" text="3" tooltip="1"/>
@@ -57,18 +57,10 @@
 											</Select>
 											<Button type="Emphasized" text="Generate" press="handleGeneratePress"/>
 											<Label text="Minsup"/>
-											<Select id="idMinsup">
-												<core:Item key="1" text="1" tooltip="1"/>
-												<core:Item key="2" text="2" tooltip="1"/>
-												<core:Item key="3" text="3" tooltip="1"/>
-												<core:Item key="4" text="4" tooltip="1"/>
-												<core:Item key="5" text="5" tooltip="1"/>
-												<core:Item key="6" text="6" tooltip="1"/>
-												<core:Item key="7" text="7" tooltip="1"/>
-												<core:Item key="8" text="8" tooltip="1"/>
-												<core:Item key="9" text="9" tooltip="1"/>
-												<core:Item key="10" text="10" tooltip="1"/>
+											<Select id="idMinsup" items="{minsupKey>/minSupKeys}">
+												<core:Item key="{minsupKey>/key}" text="{minsupKey>text}" tooltip="{minsupKey>/text}"/>
 											</Select>
+											
 											<Label text="Choose Apriori/Brute force"/>
 											<Select id="idAlgorithm">
 												<core:Item key="APRIORI" text="Apriori"/>

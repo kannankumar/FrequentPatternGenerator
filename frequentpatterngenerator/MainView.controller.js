@@ -11,6 +11,17 @@ sap.ui.controller("frequentpatterngenerator.MainView", {
 			colA: ""
 		}];
 		thatFrag = this;
+		
+		var minSup = [{
+			"key" : "1",
+			"text" : "1"
+		}];
+		var minsupModel = new sap.ui.model.json.JSONModel({
+			minSupKeys : minSup
+		});
+		sap.ui.getCore().setModel(minsupModel, "minsupKey");
+		
+		this.getView().byId('idMinsup').setModel('minsupKey');
 	},
 
 	handleGeneratePress: function() {
@@ -32,6 +43,24 @@ sap.ui.controller("frequentpatterngenerator.MainView", {
 		});
 
 		this.fnCreateTableTemplate(noOfTransactions, oTable, oTemplate, noOfItems);
+	},
+
+	setMinsup : function(){
+		var noOfTransactions = this.getView().byId("idTransactions").getSelectedKey();
+		var minSup = [];
+			
+		for(var i = 0;i < noOfTransactions; i++){
+			minSup[i] = {};
+			minSup[i].key = i+1;
+			minSup[i].text = i+1;
+		}
+		
+		var minsupModel = new sap.ui.model.json.JSONModel({
+			minSupKeys : minSup
+		});
+		sap.ui.getCore().setModel(minsupModel, "minsupKey");
+		
+		this.getView().byId('idMinsup').setModel('minsupKey');
 	},
 	
 	fnCreateTableTemplate: function(noOfTransactions, oTable, oTemplate, noOfItems) {
