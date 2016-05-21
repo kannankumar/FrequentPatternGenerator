@@ -58,7 +58,7 @@
 											<Button type="Emphasized" text="Show Input Matrix" press="handleGeneratePress"/>
 											<Label text="Minsup"/>
 											<Select id="idMinsup" items="{minsupKey>/minSupKeys}">
-												<core:Item key="{minsupKey>/key}" text="{minsupKey>text}" tooltip="{minsupKey>/text}"/>
+												<core:Item key="{minsupKey>key}" text="{minsupKey>text}" tooltip="{minsupKey>/text}"/>
 											</Select>
 											
 											<Label text="Choose Apriori/Brute force"/>
